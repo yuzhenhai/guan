@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>灌南县 政府</title>
+    <link rel="stylesheet" type="text/css" href="./css/aui/aui.css"/>
+    <style>
+      .aui-bar-nav{
+        background: #FF0000;
+
+      }
+      .act{
+        display: none;
+      }
+      .active{  display: block;}
+    </style>
+</head>
+<body>
+<div id="yuzh_index">
+  <header class="aui-bar aui-bar-nav act" v-for="(v,index) in list" v-bind:class="{'active':yuzh_index == index}">{{ v.top }}</header>
+  <footer class="aui-bar aui-bar-tab" id="footer">
+    <div class="aui-bar-tab-item aui-active" tapmode v-for="(v,index) in list" >
+        <i  v-bind:class="v.css"></i>
+        <div class="aui-bar-tab-label">{{ v.title }}</div>
+    </div>
+
+</footer>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="script/api.js"></script>
+<script type="text/javascript" src="script/vue.js"></script>
+
+<script type="text/javascript">
+    apiready = function () {
+        $api.fixStatusBar( $api.dom('header') );
+        api.setStatusBarStyle({
+            style: 'dark',
+            color: '#FF0000'
+        });
+    }
+    var vm = new Vue({
+      el:"#yuzh_index",
+      data:{
+        yuzh_index:0,
+        list:[
+          {title:"首页",top:"灌南县人民政府", css:"aui-iconfont aui-icon-home"},
+          {title:"部门信息",top:"部门信息", css:"aui-iconfont aui-icon-calendar"},
+          {title:"乡镇动态",top:"乡镇动态", css:"aui-iconfont aui-icon-cert"},
+          {title:"公示公告",top:"公示公告", css:"aui-iconfont aui-icon-mail"},
+          {title:"走进灌南",top:"走进灌南", css:"aui-iconfont aui-icon-menu"},
+          {title:"在线留言",top:"在线留言", css:"aui-iconfont aui-icon-comment"},
+        ]
+      },
+    });
+
+</script>
