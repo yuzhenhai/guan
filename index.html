@@ -54,6 +54,42 @@
           {title:"在线留言",top:"在线留言", css:"aui-iconfont aui-icon-comment"},
         ]
       },
+      methods:{
+        init:function(){
+          var headerH = $api.dom('header').offsetHeight;
+          var footerH = $api.dom('footer').offsetHeight;
+          var zhongjian = api.winHeight - headerH - footerH;
+          api.openFrameGroup ({
+              name: 'yuzh',
+              background: '#fff',
+              scrollEnabled: false,
+              rect: {
+                   x: 0,
+                   y: headerH,
+                   w: 'auto',
+                   h: zhongjian
+              },
+              index: 1,
+              frames: [{
+                  name: 'shouye',
+                  url: 'frame1.html',
+                  bgColor: '#fff'
+              },{
+                  name: 'frame2',
+                  url: 'frame2.html',
+                  bgColor: '#fff'
+              }]
+          }, function(ret, err){
+              if( ret ){
+                   alert( JSON.stringify( ret ) );
+              }else{
+                   alert( JSON.stringify( err ) );
+              }
+          });
+
+
+        },
+      }
     });
 
 </script>
