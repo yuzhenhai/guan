@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>文档</title>
+
+    <link rel="stylesheet" type="text/css" href="../css/aui/aui.css"/>
+    <style>
+    .aui-bar-nav{
+      padding-top: 30px;
+      color: '#EA0000',inherit;
+      background: #EA0000;
+    }
+    </style>
+</head>
+<body>
+  <div id="info">
+    <header class="aui-bar aui-bar-nav">
+      <a class="aui-pull-left aui-btn" onclick="chosewin()">
+          <span class="aui-iconfont aui-icon-left"></span>
+      </a>
+      <div class="aui-title">Title</div>
+    </header>
+  </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/my.js"></script>
+<script type="text/javascript">
+apiready = function () {
+  vm.init();
+  vm.id = api.pageParam.id;
+
+}
+var vm =new Vue({
+  el:"#info",
+  data:{
+    name:'',
+    id : 0,
+  },
+  methods:{
+    init:function(){
+      api.ajax({
+          url: index_url+'Index/info',
+          method: 'post',
+          data: {
+              values: {
+                  id: vm.id
+              },
+          }
+      },function(ret, err){
+        if (ret) {
+
+          alert( JSON.stringify( ret ) )
+        } else {
+            // alert( JSON.stringify( err ) );
+        }
+      });
+    },
+  }
+});
+
+</script>
+</html>
