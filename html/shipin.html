@@ -4,25 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>文档</title>
+    <title>灌南新闻</title>
 
     <link rel="stylesheet" type="text/css" href="../css/aui/aui.css"/>
     <style>
     .aui-bar-nav{
       padding-top: 30px;
       color: '#EA0000',inherit;
-      background: #EA0000;
+      background: #FF0000;
     }
+    .top{
+      width: 100%;
+      padding: 0 10px ;
+      margin-bottom: 5px;
+      height: 45px;
+      border-bottom: 4px solid #0066FF;
+    }
+    .top-left{width: 50%;float: left;}
+    .top-right{width: 40%;line-height: 45px;float: right;font-size: 25px;text-align: right;}
+    .content{padding: 10px;}
+    .yuzh_info_title{padding-bottom: 10px;border-bottom: 0.5px solid #ddd;}
+    .yuzh_info_title h3{font-weight: 900;}
+    .yuzh_info_date i{padding-right: 10px;}
+    .aui-list-item-text{text-indent: 2em;font-size: 14px;padding: 10px 0;}
     </style>
 </head>
 <body>
-  <div id="info">
+  <div id="info" class="aui-content">
     <header class="aui-bar aui-bar-nav">
       <a class="aui-pull-left aui-btn" onclick="chosewin()">
           <span class="aui-iconfont aui-icon-left"></span>
       </a>
-      <div class="aui-title">Title</div>
+      <div class="aui-title">灌南新闻</div>
     </header>
+    <div class="top">
+      <div class="top-left"><img src="http://dayan.yuzh.online/Public/upload/logo.png"></div>
+      <span v-on:click="yuzh_search" class="top-right aui-iconfont aui-icon-search"></span>
+    </div>
+    <div class="content">
+      <div class="yuzh_info_title"><h3>{{ info.name }}</h3><div class="yuzh_info_date"><i class="aui-iconfont aui-icon-date"></i>{{ info.date }}</div></div>
+
+      <div class="aui-list-item-text aui-padded-t-10">
+        <p v-html="info.details">
+        </p>
+      </div>
+    </div>
   </div>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
@@ -32,13 +58,13 @@
 apiready = function () {
   vm.init();
   vm.id = api.pageParam.id;
-
 }
 var vm =new Vue({
   el:"#info",
   data:{
     name:'',
     id : 0,
+    info:[]
   },
   methods:{
     init:function(){
@@ -47,18 +73,18 @@ var vm =new Vue({
           method: 'post',
           data: {
               values: {
-                  id: vm.id
+                  id: api.pageParam.id
               },
           }
       },function(ret, err){
         if (ret) {
-
-          alert( JSON.stringify( ret ) )
+          vm.info = ret.data.info;
         } else {
             // alert( JSON.stringify( err ) );
         }
       });
     },
+    yuzh_search:function(){},
   }
 });
 

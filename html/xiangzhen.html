@@ -86,9 +86,10 @@
      }, function(ret, err) {
          //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
         //  reloadList();
+        vm.page = 1;
+        vm.init();
          setTimeout('api.refreshHeaderLoadDone()', '500');
-         vm.page = 1;
-         vm.init();
+
      });
       api.addEventListener({
           name: 'scrolltobottom',

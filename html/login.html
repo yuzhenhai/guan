@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>会员登录</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui/aui.css"/>
+
+    <style>
+    header{
+      color: '#EA0000',inherit;
+      background: #FF0000;
+    }
+    </style>
+</head>
+<body>
+    <div id="liuyan">
+      <header class="aui-bar aui-bar-nav aui-bar-light">
+        <a class="aui-pull-left aui-btn" v-on:click="fanhui()">
+            <span class="aui-iconfont aui-icon-left"></span>
+        </a>
+        <div class="aui-title">会员登录</div>
+
+      </header>
+      <div class="aui-content aui-margin-b-15">
+          <div class="aui-list aui-form-list">
+
+              <div class="aui-list-item">
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-label">
+                          联系电话
+                      </div>
+                      <div class="aui-list-item-input">
+                          <input type="text" id="phone" name="phone" placeholder="请输入联系电话">
+                      </div>
+                  </div>
+              </div>
+              <div class="aui-list-item">
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-label">
+                          密码
+                      </div>
+                      <div class="aui-list-item-input">
+                          <input type="password" id="password" name="password" placeholder="请输入密码">
+                      </div>
+                  </div>
+              </div>
+              <div class="aui-list-item">
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-label">
+                          验证码
+                      </div>
+                      <div class="aui-list-item-input">
+                          <input type="text" name="user" placeholder="请输入验证码">
+                      </div>
+                      <div class="aui-content-padded">
+                        <img :src="yanzhen" @click="yanzheng()"/>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="aui-content-padded">
+                <p><div class="aui-btn aui-btn-info aui-btn-block">登陆</div></p>
+              </div>
+              <section class="aui-content-padded">
+                <span class="aui-text-info">忘记密码</span>
+                <span class="aui-text-info aui-pull-right" @click="register()">注册</span>
+              </section>
+            </div>
+          </div>
+
+
+    </div>
+</body>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/my.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+      vm.init();
+    }
+
+    var vm = new Vue({
+      el:'#liuyan',
+      data:{
+        yanzhen:index_url+"Index/verify",
+      },
+      methods:{
+        init:function(){
+          api.ajax({
+              url: index_url+'Index/nologin',
+              method: 'post',
+              data: {
+              }
+          },function(ret, err){
+
+          });
+
+        },
+        fanhui:function(){
+          api.openWin({
+              name: 'shouye',
+              url: './shouye.html',
+
+          });
+
+        },
+        register:function(){
+          api.openWin({
+              name: 'register',
+              url: './register.html',
+          });
+
+        },
+        yanzheng:function(){
+          const num = Math.ceil(Math.random() * 10)
+          vm.yanzhen = index_url+"Index/verify?"+num;
+        }
+
+
+
+      }
+    });
+</script>
+</html>

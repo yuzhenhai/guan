@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>在线留言</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui/aui.css"/>
+
+    <style>
+    header{
+      padding-top: 30px;
+      background: #FF0000;
+    }
+    </style>
+</head>
+<body>
+    <div id="liuyan">
+      <header class="aui-bar aui-bar-nav aui-bar-light">
+        <a class="aui-pull-left aui-btn" v-on:click="fanhui()">
+            <span class="aui-iconfont aui-icon-left"></span>
+        </a>
+        <div class="aui-title">留言反馈</div>
+        <a class="aui-pull-right aui-btn aui-btn-outlined" v-on:click="user()">
+            <span class="aui-iconfont aui-icon-user"></span>
+        </a>
+      </header>
+
+
+
+    </div>
+</body>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/my.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+    }
+
+    var vm = new Vue({
+      el:'#liuyan',
+      data:{},
+      methods:{
+        fanhui:function(){
+          api.openWin({
+              name: 'shouye',
+              url: './shouye.html',
+
+          });
+
+        }
+
+      }
+    });
+</script>
+</html>

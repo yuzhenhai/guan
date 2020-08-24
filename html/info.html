@@ -44,8 +44,9 @@
     <div class="content">
       <div class="yuzh_info_title"><h3>{{ info.name }}</h3><div class="yuzh_info_date"><i class="aui-iconfont aui-icon-date"></i>{{ info.date }}</div></div>
 
-      <div class="aui-list-item-text">
-          {{ info.details }}
+      <div class="aui-list-item-text aui-padded-t-10">
+        <p v-html="info.details">
+        </p>
       </div>
     </div>
   </div>

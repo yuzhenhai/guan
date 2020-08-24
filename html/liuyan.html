@@ -5,13 +5,143 @@
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title>在线留言</title>
-    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui/aui.css"/>
+
     <style>
-        .empty{ text-align: center; padding: 120px 0; }
     </style>
 </head>
 <body>
-    <div class="empty">在线留言</div>
+    <div id="liuyan">
+      <header class="aui-bar aui-bar-nav aui-bar-light">
+        <a class="aui-pull-left aui-btn" v-on:click="fanhui()">
+            <span class="aui-iconfont aui-icon-left"></span>
+        </a>
+        <div class="aui-title">留言反馈</div>
+        <a class="aui-pull-right aui-btn aui-btn-outlined" v-on:click="user()">
+            <span class="aui-iconfont aui-icon-my"></span>
+        </a>
+      </header>
+      <div class="aui-content aui-margin-b-15">
+          <ul class="aui-list aui-form-list">
+              <li class="aui-list-header">发布留言</li>
+              <li class="aui-list-item">
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-label">
+                          用户名昵称
+                      </div>
+                      <div class="aui-list-item-input">
+                          <input type="text" name="username" id="username" v-model="username" placeholder="请输入用户名">
+                      </div>
+                  </div>
+              </li>
+              <li class="aui-list-item">
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-label">
+                          联系电话
+                      </div>
+                      <div class="aui-list-item-input">
+                          <input type="text" name="phone" id="phone" v-model="phone" placeholder="请输入联系电话">
+                      </div>
+                  </div>
+              </li>
+              <li class="aui-list-item">
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-label">
+                          留言标题
+                      </div>
+                      <div class="aui-list-item-input">
+                          <input type="text" name="title" id="title" v-model="title" placeholder="请输入留言标题">
+                      </div>
+                  </div>
+              </li>
+              <li class="aui-list-item">
+                 <div class="aui-list-item-inner">
+                   <div class="aui-list-item-label">
+                       留言内容
+                   </div>
+                   <div class="aui-list-item-input">
+                       <textarea placeholder="请输入留言内容" name="info" id="info" v-model="info"></textarea>
+                   </div>
+                 </div>
+              </li>
+
+              <div class="aui-content-padded">
+              <p><div class="aui-btn aui-btn-info aui-btn-block" @:click="tijiao()">提交</div></p>
+            </div>
+            </ul>
+          </div>
+
+
+    </div>
 </body>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/my.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+      vm.init();
+      api.addEventListener({
+          name: 'scrolltobottom',
+          extra:{
+            threshold: 0
+          }
+      }, function(ret, err){
+          vm.init();
+      });
+    }
+
+    var vm = new Vue({
+      el:'#liuyan',
+      data:{
+        username:'',
+        phone:'',
+        title:'',
+        info:''
+      },
+      methods:{
+        init:function(){
+        },
+        fanhui:function(){
+          api.openWin({
+              name: 'shouye',
+              url: './shouye.html',
+
+          });
+
+        },
+        user:function(){
+          api.openWin({
+              name: 'user',
+              url: './user.html',
+
+          });
+
+        },
+        tijiao:function(){
+            api.ajax({
+                url: index_url+'Index/liuyan',
+                method: 'post',
+                data: {
+                    values: {
+                        username: vm.username,
+                        phone:vm.phone,
+                        title:vm.title,
+                        info:vm.info
+                    }
+                }
+            },function(ret, err){
+                if (ret) {
+                    alert( JSON.stringify( ret ) );
+                } else {
+                    alert( JSON.stringify( err ) );
+                }
+            });
+
+
+        }
+
+
+      }
+    });
+</script>
 </html>
